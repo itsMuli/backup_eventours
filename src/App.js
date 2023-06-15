@@ -5,7 +5,7 @@ import Footer from './Components/Footer/Footer';
 import Home from './Components/Home/Home';
 import About from './Components/About/About';
 import Blog from './Components/Blog/Blog';
-import Offers from './Components/Offers/Offers';
+import Packages from './Components/Packages/Packages';
 import Popular from './Components/Popular/Popular';
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
    <Navbar />
    {/* <Home />
    <Popular />
-   <Offers />
+   <Packages />
    <About />
    <Blog />
    <Footer /> */}

@@ -47,9 +47,9 @@ li{
     align-items: center;
 }
 .btn{
-    padding: 6rem 1.5rem;
+    padding: .5rem ;
     background: var(--gradientColor);
-    border-radius: 3rem;
+    border-radius: 2rem;
     border: none;
     outline: none;
     cursor: pointer;
