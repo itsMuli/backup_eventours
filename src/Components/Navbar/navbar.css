@@ -34,13 +34,13 @@
             justify-content: center;
         }
         .icon{
-            color: var(--whiteColorDeam);
+            color: var(--whiteColor);
             font-size: 25px;
         }
     }
     @media screen and (max-width: 768px) {
         .navBar{
-            background: var(--greyBg);
+            background: var(--whiteColorDeam);
             position: absolute;
             height: max-content;
             padding: 1rem;

@@ -13,7 +13,7 @@
  }
 
  .home{
-    height: 70vh;
+    height: 80vh;
     background: linear-gradient(rgba(33,33,33,0.522), 
     rgba(33,33,33,.522)), url('../../Images/img2.jpg');
     background-repeat: center;
@@ -65,7 +65,7 @@
            left: 50%;
            box-shadow: 0 2px 8px 4px rgba(178,178,178,0.45);
 
-           .locationDiv{
+           .locationDiv, .priceDiv{
                 width: 100%;
 
                 label{
@@ -75,6 +75,32 @@
                     font-size: 3px;
                     padding-bottom: .4rem;
                 }
+
+                input{
+                    width: 100%;
+                    background: var(--inputColor);
+                    border-radius: 10px;
+                    border: none;
+                    padding: 10px;
+                    font-size: 13px;
+                    font-weight: 500;
+
+                    &::placeholder{
+                        font-size: 13px;
+                        opacity: .5;
+                        font-weight: 400;
+                    }
+                    &:focus{
+                        outline: none;
+                    }
+                }
+           }
+
+           .btn{
+                width: 100%;
+                padding: .6rem 1.5rem;
+                color: var(--whiteColor);
+                font-weight: 600;
            }
         }
     }

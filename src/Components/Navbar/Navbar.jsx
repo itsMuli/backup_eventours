@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import "./navbar.css"
 import {SiYourtraveldottv} from 'react-icons/si'
-import {AiFillCloseCircle} from 'react-icons/ai'
-import {TbGridDots} from 'react-icons/tb'
+import {FaBars, FaTimes} from 'react-icons/fa'
 
 const Navbar = () => {
 
@@ -63,12 +62,12 @@ const Navbar = () => {
 
           <div onClick={removeNav}
           className="closeNavbar">
-            <AiFillCloseCircle className='icon'/>
+            <FaTimes className='icon'/>
           </div>
         </div>
 
         <div onClick={showNav} className="toggleNavbar">
-          <TbGridDots className="icon"/>
+          <FaBars className="icon"/>
         </div>
       </div>
     </section>
