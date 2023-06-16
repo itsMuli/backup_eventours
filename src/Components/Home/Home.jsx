@@ -30,7 +30,9 @@ const Home = () => {
             <label htmlFor="price">Price</label>
             <input type="text" placeholder='Price'/>
           </div>
-
+            <button className='btn'>
+              Search
+            </button>
           </div>
       </div>
     </section>

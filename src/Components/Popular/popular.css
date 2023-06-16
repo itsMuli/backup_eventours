@@ -90,7 +90,7 @@
                         background: linear-gradient(rgba(0,0,0,0.846), rgba(0,0,0,0.759));
                         bottom: 0;
                         width: 100%;
-                        height: 100%;
+                        height: 0;
                         overflow: hidden;
 
                         h3{
@@ -107,12 +107,69 @@
                             right: 10px;
                             bottom: 10px;
                             padding: 0.5rem;
-                            negative: var(--PrimaryColor);
+                            background: var(--PrimaryColor);
                             font-size: 2.5rem;
                             border-radius: 50%;
+                            color: var(--whiteColor);
+                            border: 1px solid transparent;
+                            transition: .3s ease;
+
+                            &:hover{
+                                background: var(--blackColor);
+                                border: 1px solid var(--blackColor);
+                            }
                         }
                     }   
 
+                }
+
+                .destFooter{
+                    padding: 1rem;
+
+                    .number{
+                        font-size: 2rem;
+                        font-weight: 700;
+                        color: var(--blackColor);
+                        position: relative;
+                        width: max-content;
+                        &::after{
+                            content: '';
+                            position: absolute;
+                            background: var(--PrimaryColor);
+                            top: -150%;
+                            height: 5px;
+                            width: 45px;
+                            border-radius: 1rem;
+                        }
+                    }
+
+                    .destText{
+                        justify-content: space-between;
+
+                        h6{
+                            color: var(--blackColor);
+                            font-size: 15px;
+                        }
+
+                        .flex{
+                            font-size: 16px;
+                            font-weight: 600;
+                            align-items: flex-start;
+                            transform: translateY(5px);
+
+                            .icon{
+                                color: var(--PrimaryColor);
+                            }
+                        }
+                    }
+                }
+
+                &:hover{
+                    .overlayInfo{
+                        overflow: visible;
+                        padding: 1rem 1.5rem;
+                        height: 100%;
+                    }
                 }
             }
         }

@@ -1,11 +1,59 @@
 import React from 'react'
 import './popular.css'
-import {BsArrowLeftShort, BsArrowRightShort, BsDot} from 'react-icons/bs'
-import img from '../../Images/img5.jpg'
+import {BsArrowLeftShort} from 'react-icons/bs'
+import { BsArrowRightShort } from 'react-icons/bs'
+import { BsDot } from 'react-icons/bs'
+import img3 from '../../Images/img3.jpg'
+import img6 from '../../Images/img6.jpg'
+import img7 from '../../Images/img7.jpg'
+import img8 from '../../Images/img8.jpg'
+import img1 from '../../Images/img1.jpg'
+
+const Data = [
+  {
+    id:1,
+    imgSrc: img1,
+    destTitle: 'Malindi',
+    location: 'Mombasa',
+    grade: 'HOLIDAY',
+  },
+
+  {
+    id:2,
+    imgSrc: img3,
+    destTitle: 'Malindi',
+    location: 'Mombasa',
+    grade: 'HOLIDAY',
+  },
+
+  {
+    id:3,
+    imgSrc: img6,
+    destTitle: 'Malindi',
+    location: 'Mombasa',
+    grade: 'HOLIDAY',
+  },
+
+  {
+    id:4,
+    imgSrc: img7,
+    destTitle: 'Malindi',
+    location: 'Mombasa',
+    grade: 'HOLIDAY',
+  },
+
+  {
+    id:5,
+    imgSrc: img8,
+    destTitle: 'Malindi',
+    location: 'Mombasa',
+    grade: 'HOLIDAY',
+  },
+]
 
 const Popular = () => {
   return (
-    <section className='popular-section container'>
+    <section className='popular section container'>
         <div className="secContainer">
 
           <div className="secHeader flex">
@@ -25,39 +73,47 @@ const Popular = () => {
           </div>
 
           <div className="mainContent grid">
-            <div className="singleDestination">
-              <div className="destImage">
 
-                <img src={img} alt="Image title" />
+            {
+              Data.map((id,imgSrc,destTitle,location,grade)=>{
+                return(
+                  <div className="singleDestination">
+                    <div className="destImage">
 
-                <div className="overlayInfo">
-                  <h3>Welcome to Maasai Mara</h3>
-                  <p>
-                    The best park
-                  </p>
+                    <img src={imgSrc} alt="Image title" />
 
-                  <BsArrowRightShort className='icon'/>
-                </div>
+                    <div className="overlayInfo">
+                      <h3>Welcome to Maasai Mara</h3>
+                        <p>
+                         The best park
+                        </p>
 
-              </div>
+                      <BsArrowRightShort className='icon'/>
+                    </div>
 
-              <div className="destFooter">
-                <div className="number">
-                  01
-                </div>
-                <div className="destText flex">
-                  <h6>
-                    Mombasa
-                  </h6>
-                  <span className='flex'>
-                    <span className='dot'>
+                  </div>
+
+                   <div className="destFooter">
+                   <div className="number">
+                      01
+                    </div>
+                  <div className="destText flex">
+                      <h6>
+                        Mombasa
+                      </h6>
+                      <span className='flex'>
+                      <span className='dot'>
                       <BsDot className="icon"/>
-                    </span>
-                    Dot
-                  </span>
+                      </span>
+                       Dot
+                      </span>
+                   </div>
+                 </div>
                 </div>
-              </div>
-            </div>
+                )
+              })
+            }
+
           </div>
 
         </div>
