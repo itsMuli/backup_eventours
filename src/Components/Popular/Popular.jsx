@@ -73,9 +73,8 @@ const Popular = () => {
           </div>
 
           <div className="mainContent grid">
-
             {
-              Data.map((id,imgSrc,destTitle,location,grade)=>{
+              Data.map(({id,imgSrc,destTitle,location,grade})=>{
                 return(
                   <div className="singleDestination">
                     <div className="destImage">
@@ -83,9 +82,9 @@ const Popular = () => {
                     <img src={imgSrc} alt="Image title" />
 
                     <div className="overlayInfo">
-                      <h3>Welcome to Maasai Mara</h3>
+                      <h3>{destTitle}</h3>
                         <p>
-                         The best park
+                          {location}
                         </p>
 
                       <BsArrowRightShort className='icon'/>
@@ -95,11 +94,11 @@ const Popular = () => {
 
                    <div className="destFooter">
                    <div className="number">
-                      01
+                      0{id}
                     </div>
                   <div className="destText flex">
                       <h6>
-                        Mombasa
+                        {location}
                       </h6>
                       <span className='flex'>
                       <span className='dot'>

@@ -10,7 +10,7 @@
     --inputColor: rgb(239, 239, 239);
     --bodyColor: rgb(240,240,246);
     --cardBG: rgb(225, 225, 225);
-    --greyText: hsl(190, 190, 190);
+    --greyText: hsl(190, 190%, 190%);
  }
 
  .popular{
@@ -71,7 +71,7 @@
 
                 .destImage{
                     height: 200px;
-                    width: 100%;
+                    width: 60%;
                     position: relative;
                     overflow: hidden;
                     img{
