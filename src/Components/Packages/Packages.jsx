@@ -25,6 +25,10 @@ const Packages = () => {
               <div className="destImage">
                 <img src={img} alt="Image Name" />
                   <br></br>
+                  <span className="destination">
+                    DIANI
+                  </span>
+                  <br/>
                 <span className="discount">
                   30% Off
                 </span>
@@ -35,16 +39,8 @@ const Packages = () => {
                   <h4>
                     Ksh 21,000
                   </h4>
-                  <span className="status">
-                    For Booking
-                  </span>
                 </div>
 
-                <div className="amenities flex">
-                  <div className="singleAmenity flex">
-                    <FaAddressBook className="icon"/>
-                  </div>
-                </div>
 
                 <button className="btn flex">
                   View Details 
