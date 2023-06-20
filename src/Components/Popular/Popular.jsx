@@ -4,9 +4,9 @@ import {BsArrowLeftShort} from 'react-icons/bs'
 import { BsArrowRightShort } from 'react-icons/bs'
 import { BsDot } from 'react-icons/bs'
 import img3 from '../../Images/img3.jpg'
-import img6 from '../../Images/img6.jpg'
-import img7 from '../../Images/img7.jpg'
-import img8 from '../../Images/img8.jpg'
+import img10 from '../../Images/img10.jpg'
+import img5 from '../../Images/img5.jpg'
+import img9 from '../../Images/img9.jpg'
 import img1 from '../../Images/img1.jpg'
 
 const Data = [
@@ -28,7 +28,7 @@ const Data = [
 
   {
     id:3,
-    imgSrc: img6,
+    imgSrc: img10,
     destTitle: 'Malindi',
     location: 'Mombasa',
     grade: 'HOLIDAY',
@@ -36,7 +36,7 @@ const Data = [
 
   {
     id:4,
-    imgSrc: img7,
+    imgSrc: img5,
     destTitle: 'Malindi',
     location: 'Mombasa',
     grade: 'HOLIDAY',
@@ -44,7 +44,7 @@ const Data = [
 
   {
     id:5,
-    imgSrc: img8,
+    imgSrc: img9,
     destTitle: 'Malindi',
     location: 'Mombasa',
     grade: 'HOLIDAY',

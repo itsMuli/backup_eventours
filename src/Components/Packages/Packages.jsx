@@ -1,5 +1,9 @@
 import React from 'react';
 import './packages.css'
+import { FaAddressBook } from 'react-icons/fa';
+import {BsArrowRightShort} from 'react-icons/bs';
+
+import img from '../../Images/img11.jpg'
 
 const Packages = () => {
   return (
@@ -19,8 +23,8 @@ const Packages = () => {
 
           <div className="singlePackage">
               <div className="destImage">
-                <img src="" alt="Image Name" />
-
+                <img src={img} alt="Image Name" />
+                  <br></br>
                 <span className="discount">
                   30% Off
                 </span>
@@ -38,9 +42,14 @@ const Packages = () => {
 
                 <div className="amenities flex">
                   <div className="singleAmenity flex">
-                    
+                    <FaAddressBook className="icon"/>
                   </div>
                 </div>
+
+                <button className="btn flex">
+                  View Details 
+                  <BsArrowRightShort className="icon"/>
+                </button>
               </div>
           </div>
         </div>

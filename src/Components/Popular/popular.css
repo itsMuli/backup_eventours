@@ -67,7 +67,8 @@
             .singleDestination{
                 overflow: hidden;
                 border-radius: 1rem;
-                box-shadow: 0 2px 8px 2px rgba(178,178,178,0.334);
+                padding: .5rem;
+                box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.189);
 
                 .destImage{
                     height: 200px;
