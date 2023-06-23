@@ -15,7 +15,7 @@ const App = () => {
    <Popular />
    <Packages />
    <Blog />
-   {/* <Footer /> */}
+   <Footer />
    </>
   )
 }
