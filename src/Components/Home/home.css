@@ -105,3 +105,15 @@
         }
     }
  }
+
+ @media screen and (min-width:480px) {
+    .home{
+        .secContainer{
+            .homeCard{
+                bottom: -100px;
+                width: 90%;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+ }
