@@ -3,6 +3,7 @@ import "./navbar.css"
 import {SiYourtraveldottv} from 'react-icons/si'
 import {FaBars, FaTimes} from 'react-icons/fa'
 
+
 const Navbar = () => {
 
   const [active, setActive] = useState('navBar')
@@ -41,10 +42,6 @@ const Navbar = () => {
 
             <li className='navItem'>
               <a href="#" className='navLink'>Home</a>
-            </li>
-
-            <li className='navItem'>
-              <a href="#" className='navLink'>About</a>
             </li>
 
             <li className='navItem'>
