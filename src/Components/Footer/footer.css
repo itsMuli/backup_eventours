@@ -41,6 +41,43 @@
             gap: .5rem;
             margin: auto;
             justify-content: center;
+
+            .icon{
+                font-size: 30px;
+                background: var(--PrimaryColor);
+                border-radius: 50%;
+                padding: 8px;
+                color: var(--whiteColor);
+                &:hover{
+                    background: var(--blackColor);
+                }
+            }
+        }
+
+        .footerLinks{
+            display: grid;
+            row-gap: .2rem;
+
+            .linkTitles{
+                padding-bottom: .5rem;
+                color: var(--blackColor);
+                font-weight: 700;
+            }
+
+            li{
+                &:hover{
+                    transform: translateX(10px);
+                    a{
+                        color: var(--PrimaryColor);
+                    }
+                }
+            }
+
+            a, .phone, .email{
+                color: var(--textColor);
+                font-size: 13px;
+                font-weight: 500;
+            }
         }
     }
  }
