@@ -113,4 +113,44 @@ input{
         width: 75% !important;
         margin: auto !important;
     }
+
+    .section{
+        padding: 5rem 0.3rem;
+    }
+
+    .secIntro{
+        margin: 0 auto 3rem;
+    }
+
+    .secIntro .secTitle{
+        line-height: 2rem;
+        padding-bottom: 1rem;
+        font-size: 2.2rem;
+    }
+
+    .secIntro p{
+        font-size: 15px;
+    }
+
+    @media screen and (min-width: 2560px) {
+        body{
+            zoom: 1.7;
+        }
+    }
 }
+
+/* ::selection{
+    background: var(--PrimaryColor);
+    color: var(--whiteColor);
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+    background: var(--greyColor);
+}
+
+::-webkit-slider-thumb{
+    background: var(--PrimaryColor);
+    border-radius: 10px;
+    cursor: pointer;
+} */
