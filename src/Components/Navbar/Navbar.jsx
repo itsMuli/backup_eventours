@@ -45,7 +45,7 @@ const Navbar = () => {
             </li>
 
             <li className='navItem'>
-              <a href="#" className='navLink'>Popular Destinations</a>
+              <a href="/Popular" className='navLink'>Popular Destinations</a>
             </li>
 
             <li className='navItem'>

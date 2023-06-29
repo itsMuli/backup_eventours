@@ -6,11 +6,17 @@ import Home from './Components/Home/Home';
 import Blog from './Components/Blog/Blog';
 import Packages from './Components/Packages/Packages';
 import Popular from './Components/Popular/Popular';
+import { BrowserRouter } from 'react-router-dom';
 
 const App = () => {
   return (
    <>
    <Navbar />
+   {/* <BrowserRouter>
+    <Routes>
+      <Route path='#' 
+    </Routes>
+   </BrowserRouter> */}
    <Home />
    <Popular />
    <Packages />

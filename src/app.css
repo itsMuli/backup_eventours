@@ -19,6 +19,7 @@
    --inputColor: rgb(239, 239, 239);
    --bodyColor: rgb(240,240,246);
    --cardBG: rgb(225, 225, 225);
+   --HoverColor: hsl(187, 85%, 43%);
 }
 
 a{
