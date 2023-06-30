@@ -63,7 +63,7 @@ li{
     background: var(--SecondaryColor);
 }
 img, video{
-    width: 50%;
+    width: 100%;
     height: auto;
 }
 input{
@@ -89,7 +89,7 @@ body{
     font-weight: 500;
 }
 img, video{
-    width: 50;
+    width: 100;
     height: auto;
 }
 input{
