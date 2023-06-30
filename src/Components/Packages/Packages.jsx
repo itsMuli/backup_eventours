@@ -1,6 +1,5 @@
 import React from 'react';
 import './packages.css'
-import { FaAddressBook } from 'react-icons/fa';
 import {BsArrowRightShort} from 'react-icons/bs';
 
 import img from '../../Images/img11.jpg'

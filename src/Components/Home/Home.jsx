@@ -21,7 +21,7 @@ const Home = () => {
             Plan Your Trip With EvenTours
           </h1>
           <p data-aos="fade-up" data-aos-duration="2500" className="subTitle">
-            Travel to your favourite city with respectful of the envieonment!
+            Travel to your favourite city with respectful of the environment!
           </p>
 
           <button data-aos="fade-up" data-aos-duration="2500" className='btn'>
