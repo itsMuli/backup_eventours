@@ -28,13 +28,9 @@ const Popular = () => {
           <div className="singleDestination">
             <div className="destImage">
 
-              <img src={img} alt="Iage title" />
+              <img src={img} alt="Image title" />
 
-              <div className="overlayInfo">
-                <h3>Some Text</h3>
-                <p>lorem ipsum</p>
-                <BsArrowRightShort className="icon"/>
-              </div>
+              
             </div>
 
             <div className="destFooter">
@@ -43,12 +39,12 @@ const Popular = () => {
               </div>
 
               <div className="destText flex">
-                <h6>Malindi</h6>
-                <span className="flex">
+                <h2>Diani</h2>
+                {/* <span className="flex">
                   <span className="dot">
                     <BsDot className="icon"/>
                   </span>
-                </span>
+                </span> */}
               </div>
             </div>
           </div>
