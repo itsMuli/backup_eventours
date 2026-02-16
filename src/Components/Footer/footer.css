@@ -138,6 +138,21 @@
 }
 
 /* Media Queries */
+@media screen and (max-width: 640px) {
+    .footer {
+        padding: 0;
+
+        .secContainer {
+            display: none;
+        }
+
+        .footerBottom {
+            margin-top: 0;
+            border-top: none;
+        }
+    }
+}
+
 @media screen and (min-width: 640px) {
     .footer {
         .secContainer {
