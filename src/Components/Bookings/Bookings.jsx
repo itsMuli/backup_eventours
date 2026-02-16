@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './bookings.css';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 
@@ -20,16 +20,10 @@ const Bookings = () => {
         } else {
             setLoading(false);
         }
-    }, [isLoggedIn, token]);
-
-    const fetchData = async () => {
-        setLoading(true);
-        await Promise.all([fetchBookings(), fetchTickets()]);
-        setLoading(false);
-    };
+    }, [isLoggedIn, token, fetchData]);
 
 
-    const fetchBookings = async () => {
+    const fetchBookings = useCallback(async () => {
         try {
             const response = await fetch('http://localhost:5000/api/bookings/mybookings', {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -41,10 +35,10 @@ const Bookings = () => {
         } catch (err) {
             console.error("Fetch bookings error:", err);
         }
-    };
+    }, [token]);
 
 
-    const fetchTickets = async () => {
+    const fetchTickets = useCallback(async () => {
         try {
             const response = await fetch('http://localhost:5000/api/tickets/mytickets', {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -56,7 +50,14 @@ const Bookings = () => {
         } catch (err) {
             console.error("Fetch tickets error:", err);
         }
-    };
+    }, [token]);
+
+    const fetchData = useCallback(async () => {
+        setLoading(true);
+        await Promise.all([fetchBookings(), fetchTickets()]);
+        setLoading(false);
+    }, [fetchBookings, fetchTickets]);
+
 
 
 
