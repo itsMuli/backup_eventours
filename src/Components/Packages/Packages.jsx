@@ -76,10 +76,6 @@ const Packages = () => {
 
     const handleBookNowSubmit = (e) => {
         e.preventDefault();
-        if(!isLoggedIn){
-            navigate('/login');
-            return;
-        }
         
         const newBooking = {
             id: Date.now(),
@@ -234,7 +230,11 @@ const Packages = () => {
                                     <div className="totalPrice"><strong>Total:</strong> Ksh {selectedPackage.price * (bookingData.guests || 1)}</div>
                                     <div className="formBtns flex">
                                         <button type="button" className="btn backBtn" onClick={() => setIsBooking(false)}>Back</button>
-                                        <button type="submit" className="btn">{isLoggedIn ? 'Confirm' : 'Login to Book'}</button>
+                                        {isLoggedIn ? (
+                                            <button type="submit" className="btn">Confirm</button>
+                                        ) : (
+                                            <button type="button" className="btn" onClick={() => navigate('/login')}>Login to Book</button>
+                                        )}
                                     </div>
                                 </form>
                             </div>
