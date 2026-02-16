@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./app.css"
 import Navbar from './Components/Navbar/Navbar';
 import Footer from './Components/Footer/Footer';
@@ -6,23 +6,39 @@ import Home from './Components/Home/Home';
 import Blog from './Components/Blog/Blog';
 import Packages from './Components/Packages/Packages';
 import Popular from './Components/Popular/Popular';
-import { BrowserRouter } from 'react-router-dom';
+import Login from './Components/Login/Login';
+import Signup from './Components/Signup/Signup';
+import ForgotPassword from './Components/Login/ForgotPassword';
+import SupportModal from './Components/Support/SupportModal';
+import { Routes, Route } from 'react-router-dom';
 
 const App = () => {
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
+
+  const toggleSupport = () => {
+    setIsSupportOpen(!isSupportOpen);
+  }
+
   return (
-   <>
-   <Navbar />
-   {/* <BrowserRouter>
-    <Routes>
-      <Route path='#' 
-    </Routes>
-   </BrowserRouter> */}
-   <Home />
-   <Popular />
-   <Packages />
-   <Blog />
-   <Footer />
-   </>
+    <>
+      <Navbar openSupport={toggleSupport} />
+      {isSupportOpen && <SupportModal closeSupport={toggleSupport} />}
+      <Routes>
+        <Route path="/" element={
+          <>
+            <Home />
+            <Popular />
+            <Packages />
+            <Blog />
+          </>
+        } />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/packages" element={<Packages />} />
+      </Routes>
+      <Footer openSupport={toggleSupport} />
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-:root{
+:root {
     --PrimaryColor: hsl(199, 100%, 33%);
     --SecondaryColor: hsl(187, 85%, 43%);
     --gradientColor: linear-gradient(to right, hsl(187, 84%, 43%), hsl(199, 100%, 33%));
@@ -9,12 +9,12 @@
     --whiteColorDeam: hsl(0, 0%, 93%);
     --greyColor: rgb(190, 190, 190);
     --inputColor: rgb(239, 239, 239);
-    --bodyColor: rgb(240,240,246);
+    --bodyColor: rgb(240, 240, 246);
     --cardBG: rgb(225, 225, 225);
- }
+}
 
- .navBarSection{
-    .header{
+.navBarSection {
+    .header {
         position: fixed;
         display: flex;
         align-items: center;
@@ -25,27 +25,74 @@
         z-index: 1000;
     }
 
-    .activeHeader{
-        background: var(--greyColor);
+    .activeHeader {
+        background: var(--whiteColorDeam);
         box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.45);
+
+        .logo,
+        .navLink,
+        .icon,
+        .loginBtn a {
+            color: var(--blackColor) !important;
+        }
+
+        .loginBtn {
+            border-color: var(--blackColor) !important;
+
+            &:hover {
+                background: var(--PrimaryColor) !important;
+                border-color: var(--PrimaryColor) !important;
+
+                a {
+                    color: var(--whiteColor) !important;
+                }
+            }
+        }
     }
 
-    .logoDiv{
-        .logo{
+    .authHeader {
+        background: #e9ecef;
+
+        /* Greyish background */
+        .logo,
+        .navLink,
+        .icon,
+        .loginBtn a {
+            color: var(--blackColor) !important;
+        }
+
+        .loginBtn {
+            border-color: var(--blackColor) !important;
+
+            &:hover {
+                background: var(--PrimaryColor) !important;
+                border-color: var(--PrimaryColor) !important;
+
+                a {
+                    color: var(--whiteColor) !important;
+                }
+            }
+        }
+    }
+
+    .logoDiv {
+        .logo {
             color: var(--whiteColor);
             font-weight: 500;
             cursor: pointer;
             align-items: center;
             justify-content: center;
         }
-        .icon{
+
+        .icon {
             color: var(--whiteColor);
             font-size: 25px;
             margin-right: 10px;
         }
     }
+
     @media screen and (max-width: 768px) {
-        .navBar{
+        .navBar {
             background: var(--whiteColorDeam);
             position: absolute;
             height: max-content;
@@ -53,51 +100,58 @@
             width: 100%;
             top: 0;
             left: -500%;
-            box-shadow: 0 2px 4px rgba(200,200,200,0.904);
+            box-shadow: 0 2px 4px rgba(200, 200, 200, 0.904);
             transition: .5s ease;
             z-index: 1000;
 
-            .navLists{
+            .navLists {
                 flex-direction: column;
                 justify-content: center;
                 width: 100%;
                 margin: auto;
 
-                .navItem{
+                .navItem {
                     padding: 1rem 0;
 
-                    .navLink{
+                    .navLink {
                         color: var(--textColor);
                         font-size: 1 rem;
                         font-weight: 600;
-                        &:hover{
+                        cursor: pointer;
+
+                        &:hover {
                             color: var(--PrimaryColor);
                         }
                     }
                 }
-                .headerBtns{
+
+                .headerBtns {
                     flex-direction: column;
-                    .btn{
+
+                    .btn {
                         margin-top: 1rem;
 
-                        a{
+                        a {
                             font-weight: 600;
 
-                            &:hover{
+                            &:hover {
                                 color: var(--whiteColor);
                             }
                         }
                     }
-                    .loginBtn{
-                        background: var(--gradientColor);
-                        border: 1px solid var(--PrimaryColor);
 
-                        a{
-                            color: var(--PrimaryColor);
+                    .loginBtn {
+                        background: var(--gradientColor);
+                        border: 1px solid var(--blackColor);
+
+                        a {
+                            color: var(--blackColor);
                         }
-                        &:hover{
+
+                        &:hover {
                             background: var(--HoverColor);
-                            a{
+
+                            a {
                                 color: var(--whiteColor);
                             }
                         }
@@ -105,74 +159,84 @@
                 }
             }
 
-            .closeNavbar{
+            .closeNavbar {
                 position: absolute;
                 top: 1rem;
                 right: 1.5rem;
                 color: var(--PrimaryColor);
-                &:hover .icon{
+
+                &:hover .icon {
                     color: var(--HoverColor);
                 }
             }
         }
-        .activeNavbar{
+
+        .activeNavbar {
             left: 0;
         }
     }
-    .toggleNavbar{
-        .icon{
+
+    .toggleNavbar {
+        .icon {
             font-size: 25px;
             color: var(--whiteColor);
-            &:hover{
+
+            &:hover {
                 color: var(--PrimaryColor);
             }
         }
     }
- }
+}
 
 @media screen and (min-width: 769px) {
-    .navBarSection{
-        .toggleNavbar, .closeNavbar{
+    .navBarSection {
+
+        .toggleNavbar,
+        .closeNavbar {
             display: none;
         }
-    
-        .header{
+
+        .header {
             padding: 1.5rem 2rem !important;
-            .navBar{
-                .navLists{
+
+            .navBar {
+                .navLists {
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     flex-direction: row;
 
-                    .navItem{
-                        .navLink{
+                    .navItem {
+                        .navLink {
                             color: var(--whiteColor);
                             padding: 0.45rem;
                             font-size: .9rem;
                             font-weight: 400;
-                            &:hover{
+                            cursor: pointer;
+
+                            &:hover {
                                 color: var(--PrimaryColor);
                             }
                         }
                     }
 
-                    .btn{
+                    .btn {
                         margin-left: 1rem;
 
-                        a{
+                        a {
                             columns: var(--whiteColor);
                             font-weight: 500;
                         }
                     }
 
-                    .loginBtn{
+                    .loginBtn {
                         background: none;
                         border: 1px solid var(--PrimaryColor);
 
-                        &:hover{
+                        &:hover {
                             background: var(--PrimaryColor);
-                            a{
+
+                            a {
                                 columns: var(--whiteColor);
                             }
                         }
@@ -184,18 +248,19 @@
 }
 
 @media screen and (min-width: 960px) {
-    .header{
-        .navBar{
-            .navLists{
-                .navItem{
+    .header {
+        .navBar {
+            .navLists {
+                .navItem {
                     padding: 0.7rem;
                 }
             }
         }
     }
 }
+
 @media screen and (min-width: 1024px) {
-    .header{
+    .header {
         padding: 1rem 8.5rem !important;
     }
 }

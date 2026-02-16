@@ -47,7 +47,7 @@ const Popular = () => {
   //   slidesToScroll: 1
   // };
   return (
-    <section className="popular section container">
+    <section id="popular" className="popular section container">
       <div className="secContainer">
 
         <div className="secHeader flex">
@@ -75,9 +75,9 @@ const Popular = () => {
                 </div>
     
                 <div className="destFooter">
-                  <div className="number">
+                  {/* <div className="number">
                     {id}
-                  </div>
+                  </div> */}
     
                   <div className="destText flex">
                     <h2>{title}</h2>

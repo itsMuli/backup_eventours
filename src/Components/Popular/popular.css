@@ -1,4 +1,4 @@
-:root{
+:root {
     --PrimaryColor: hsl(199, 100%, 33%);
     --SecondaryColor: hsl(187, 85%, 43%);
     --gradientColor: linear-gradient(to right, hsl(187, 84%, 43%), hsl(199, 100%, 33%));
@@ -8,51 +8,55 @@
     --whiteColorDeam: hsl(0, 0%, 93%);
     --greyColor: rgb(190, 190, 190);
     --inputColor: rgb(239, 239, 239);
-    --bodyColor: rgb(240,240,246);
+    --bodyColor: rgb(240, 240, 246);
     --cardBG: rgb(225, 225, 225);
     --HoverColor: hsl(187, 85%, 43%);
- }
+}
 
- .popular{
+.popular {
     padding-top: 15rem;
+    padding-bottom: 1rem !important;
 
-    .secContainer{
-        .secHeader{
+    .secContainer {
+        .secHeader {
             flex-direction: column;
             align-items: center;
             gap: 1rem;
 
-            .textDiv{
-                .secTitle{
+            .textDiv {
+                .secTitle {
                     color: var(--blackColor);
                     line-height: 1.5rem;
                     padding-bottom: .5rem;
                 }
 
-                p{
+                p {
                     font-size: 13px;
                     color: var(--textColor);
                     font-weight: 500;
                 }
             }
 
-            .iconsDiv{
+            .iconsDiv {
                 gap: 0.5rem;
-                .icon{
+
+                .icon {
                     padding: .5rem;
                     background: var(--greyColor);
                     border-radius: 50%;
                     font-size: 2.5rem;
-                    &:hover{
+
+                    &:hover {
                         background: var(--blackColor);
                         color: var(--whiteColor);
                     }
                 }
 
-                .leftIcon{
+                .leftIcon {
                     background: var(--blackColor);
                     color: var(--whiteColor);
-                    &:hover{
+
+                    &:hover {
                         background: var(--greyColor);
                         color: var(--blackColor);
                     }
@@ -60,27 +64,28 @@
             }
         }
 
-        .mainContent{
+        .mainContent {
             padding: 2rem 0;
             gap: 1rem;
 
-            .singleDestination{
+            .singleDestination {
                 overflow: hidden;
                 border-radius: 1rem;
-                box-shadow: 0 2px 8px 2px rgba(178,178,178,0.334);
+                box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.334);
 
-                .destImage{
+                .destImage {
                     height: 200px;
                     width: 100%;
                     position: relative;
                     overflow: hidden;
-                    img{
+
+                    img {
                         height: 100%;
                         width: 100%;
                         object-fit: cover;
                     }
 
-                    .overlayInfo{
+                    .overlayInfo {
                         position: absolute;
                         display: flex;
                         align-items: flex-start;
@@ -93,46 +98,49 @@
                         height: 100%;
                         overflow: hidden;
 
-                        h3{
+                        h3 {
                             color: var(--whiteColor);
                             font-weight: 600;
                         }
-                        p{
+
+                        p {
                             color: var(--whiteColor);
                             opacity: .7;
                             font-size: 13px;
                         }
-                        .icon{
-                           position: absolute;
-                           right: 10px;
-                           bottom: 10px;
-                           padding: .5rem;
-                           background: var(--PrimaryColor); 
-                           font-size: 2.5rem;
-                           border-radius: 50%;
-                           columns: var(--whiteColor);
-                           border: 1px solid transparent;
-                           transition: .3s ease;
 
-                           &:hover{
-                            background: var(--blackColor);
-                            border: 1px solid var(--PrimaryColor);
-                            color: var(--PrimaryColor);
-                           }
+                        .icon {
+                            position: absolute;
+                            right: 10px;
+                            bottom: 10px;
+                            padding: .5rem;
+                            background: var(--PrimaryColor);
+                            font-size: 2.5rem;
+                            border-radius: 50%;
+                            columns: var(--whiteColor);
+                            border: 1px solid transparent;
+                            transition: .3s ease;
+
+                            &:hover {
+                                background: var(--blackColor);
+                                border: 1px solid var(--PrimaryColor);
+                                color: var(--PrimaryColor);
+                            }
                         }
                     }
                 }
 
-                .destFooter{
+                .destFooter {
                     padding: .1rem;
 
-                    .number{
+                    .number {
                         font-size: 1.3rem;
                         font-weight: 700;
                         color: var(--blackColor);
                         position: inherit;
                         width: max-content;
-                        &::after{
+
+                        &::after {
                             content: '';
                             background: var(--PrimaryColor);
                             top: 45%;
@@ -143,28 +151,31 @@
                         }
                     }
 
-                    .destText{
-                        justify-content: space-between;
+                    .destText {
+                        justify-content: center;
+                        padding: 1rem;
 
-                        h2{
+                        h2 {
                             color: var(--blackColor);
-                            font-size: 15px;
+                            font-size: 16px;
+                            font-weight: 500;
                         }
-                        .flex{
+
+                        .flex {
                             font-size: 16px;
                             font-weight: 600;
                             align-items: flex-start;
                             transform: translateY(5px);
 
-                            .icon{
+                            .icon {
                                 color: var(--PrimaryColor);
                             }
                         }
                     }
                 }
 
-                &:hover{
-                    .overlayInfo{
+                &:hover {
+                    .overlayInfo {
                         overflow: visible;
                         padding: 1rem 1.5rem;
                         height: 100%;
@@ -173,63 +184,64 @@
             }
         }
     }
- }
+}
 
- @media screen and (min-width:480px) {
-    .popular{
+@media screen and (min-width:480px) {
+    .popular {
         padding-top: 10rem;
     }
- }
+}
 
- 
- @media screen and (min-width:556px) {
-    .popular{
-        .secContainer{
-            .secHeader{
+
+@media screen and (min-width:556px) {
+    .popular {
+        .secContainer {
+            .secHeader {
                 width: 100%;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
 
-                .textDiv{
+                .textDiv {
                     text-align: start;
                     max-width: 70%;
                 }
 
-                .iconsDiv{
+                .iconsDiv {
                     justify-content: flex-end;
                 }
             }
         }
     }
- }
+}
 
- @media screen and (min-width:720px) {
-    .popular{
-       padding-top: 7rem;
+@media screen and (min-width:720px) {
+    .popular {
+        padding-top: 7rem;
     }
- }
+}
 
- @media screen and (min-width:720px) {
-    .popular{
-       padding-top: 10rem;
+@media screen and (min-width:720px) {
+    .popular {
+        padding-top: 10rem;
 
-       .secContainer{
-        .secHeader{
-            .textDiv{
-                .secTitle{
-                    font-size: 2.2rem;
-                }
-                p{
-                    font-size: 15px;
+        .secContainer {
+            .secHeader {
+                .textDiv {
+                    .secTitle {
+                        font-size: 2.2rem;
+                    }
+
+                    p {
+                        font-size: 15px;
+                    }
                 }
             }
+
+            .mainContent {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem !important;
+            }
         }
-        
-        .mainContent{
-            grid-template-columns: repeat(4,1fr);
-            gap: 1.5rem !important;
-        }
-       }
     }
- }
+}

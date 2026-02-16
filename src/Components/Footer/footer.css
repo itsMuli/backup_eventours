@@ -1,4 +1,4 @@
-:root{
+:root {
     --PrimaryColor: hsl(199, 100%, 33%);
     --SecondaryColor: hsl(187, 85%, 43%);
     --gradientColor: linear-gradient(to right, hsl(187, 84%, 43%), hsl(199, 100%, 33%));
@@ -7,100 +7,150 @@
     --textColor: hsl(240, 4%, 36%);
     --whiteColorDeam: hsl(0, 0%, 93%);
     --greyColor: rgb(190, 190, 190);
-    --inputColor: rgb(239, 239, 239);
-    --bodyColor: rgb(240,240,246);
-    --cardBG: rgb(225, 225, 225);
- }
+}
 
- .footer{
-    background: var(--greyColor);
-    padding: 2rem;
+.footer {
+    background: var(--whiteColorDeam);
+    padding: 4rem 0 0;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 
-    .secContainer{
-        gap: 1.5rem;
-        text-align: center;
-        .footerLogo{
-            padding-bottom: .5rem;
-            .logo{
-                color: var(--blackColor);
-                font-weight: 500;
-                cursor: pointer;
-                align-items: center;
-                justify-content: center;
+    .secContainer {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 3rem;
+        align-items: flex-start;
 
-                .icon{
-                    font-size: 25px;
-                    color: var(--PrimaryColor);
-                    margin-right: .5rem;
-                }
-            }
-        }
-
-        .socials{
-            gap: .5rem;
-            margin: auto;
-            justify-content: center;
-
-            .icon{
-                font-size: 30px;
-                background: var(--PrimaryColor);
-                border-radius: 50%;
-                padding: 8px;
-                color: var(--whiteColor);
-                &:hover{
-                    background: var(--blackColor);
-                }
-            }
-        }
-
-        .footerLinks{
-            display: grid;
-            row-gap: .2rem;
-
-            .linkTitles{
-                padding-bottom: .5rem;
-                color: var(--blackColor);
+        .footerSection {
+            .sectionTitle {
+                display: block;
+                font-size: 1.1rem;
                 font-weight: 700;
-            }
+                color: var(--blackColor);
+                margin-bottom: 1.5rem;
+                position: relative;
 
-            li{
-                &:hover{
-                    transform: translateX(10px);
-                    a{
+                &::after {
+                    content: '';
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    width: 30px;
+                    height: 2px;
+                    background: var(--PrimaryColor);
+                }
+            }
+        }
+
+        .brandSection {
+            .footerLogo {
+                margin-bottom: 1rem;
+
+                .logo {
+                    font-size: 1.5rem;
+                    color: var(--blackColor);
+                    font-weight: 700;
+                    gap: .5rem;
+
+                    .icon {
                         color: var(--PrimaryColor);
                     }
                 }
             }
 
-            a, .phone, .email{
+            .footerText {
+                font-size: 14px;
                 color: var(--textColor);
-                font-size: 13px;
-                font-weight: 500;
+                line-height: 1.6;
+                margin-bottom: 1.5rem;
+            }
+
+            .socials {
+                gap: 1rem;
+
+                .icon {
+                    font-size: 20px;
+                    color: var(--textColor);
+                    transition: .3s ease;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: var(--PrimaryColor);
+                        transform: translateY(-3px);
+                    }
+                }
+            }
+        }
+
+        .linkSection {
+            .footerLinks {
+                display: grid;
+                gap: .8rem;
+
+                li {
+                    transition: .3s ease;
+
+                    a,
+                    .footerSpan {
+                        color: var(--textColor);
+                        font-size: 14px;
+                        font-weight: 500;
+                        cursor: pointer;
+
+                        &:hover {
+                            color: var(--PrimaryColor);
+                        }
+                    }
+
+                    &:hover {
+                        transform: translateX(5px);
+                    }
+                }
+            }
+        }
+
+        .contactSection {
+            .contactDetails {
+                display: grid;
+                gap: .8rem;
+
+                span {
+                    display: block;
+                    font-size: 14px;
+                    color: var(--textColor);
+                    font-weight: 500;
+                }
             }
         }
     }
- }
 
- @media screen and (min-width: 448px) {
-    .secContainer{
-        grid-template-columns: repeat(2,1fr);
+    .footerBottom {
+        margin-top: 3rem;
+        padding: 1.5rem 0;
         text-align: center;
-        align-items: flex-start;
+        border-top: 1px solid var(--greyColor);
 
-        .footerLinks{
-            justify-content: center;
+        p {
+            font-size: 13px;
+            color: var(--textColor);
         }
     }
- }
+}
 
- @media screen and (min-width: 640px) {
-    .secContainer{
-        grid-template-columns: 4,1fr;
+/* Media Queries */
+@media screen and (min-width: 640px) {
+    .footer {
+        .secContainer {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
- }
+}
 
- @media screen and (min-width: 640px) {
-    .secContainer{
-        padding: 2rem;
+@media screen and (min-width: 884px) {
+    .footer {
+        .secContainer {
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 5rem;
+        }
     }
- }
+}

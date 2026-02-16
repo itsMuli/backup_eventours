@@ -1,38 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
-* {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-}
-
 :root {
-    --linear-grad: linear-gradient(to right, #141E30, #243B55);
-    --grad-clr1: #141E30;
-    --grad-clr2: #243B55;
+    --PrimaryColor: hsl(199, 100%, 33%);
+    --SecondaryColor: hsl(187, 85%, 43%);
+    --gradientColor: linear-gradient(to right, hsl(187, 84%, 43%), hsl(199, 100%, 33%));
+    --whiteColor: hsl(0, 0%, 100%);
+    --blackColor: hsl(201, 33%, 16%);
+    --textColor: hsl(240, 4%, 36%);
+    --whiteColorDeam: hsl(0, 0%, 93%);
+    --greyColor: rgb(190, 190, 190);
+    --inputColor: rgb(239, 239, 239);
+    --bodyColor: rgb(240, 240, 246);
 }
 
-body {
+.loginPage {
     height: 100vh;
-    background: #f6f5f7;
-    display: grid;
-    place-content: center;
-    font-family: 'Poppins', sans-serif;
+    width: 50%;
+    margin: auto;
+    justify-content: center;
 }
 
-footer {
-    position: absolute;
-    left: 50%;
-    bottom: 30px;
-    transform: translateX(-50%);
+.loginPage .container {
+    width: 100%;
+    max-width: 450px;
+    background: var(--whiteColor);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    margin: auto;
 }
-footer mark {
-    padding: 8px 30px;
-    border-radius: 7px;
+
+.loginPage .container .formDiv {
+    width: 100%;
+    flex-direction: column;
+    gap: 1.5rem;
 }
-footer a {
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    color: #003;
+
+.loginPage .container .formDiv .headerDiv {
+    text-align: center;
+}
+
+.loginPage .container .formDiv .headerDiv h3 {
+    color: var(--blackColor);
+    font-size: 25px;
+}
+
+.loginPage .container .formDiv .form {
+    width: 100%;
+    gap: 1rem;
+}
+
+.loginPage .container .formDiv .form .inputDiv {
+    width: 100%;
+}
+
+.loginPage .container .formDiv .form .inputDiv label {
+    display: block;
+    color: var(--textColor);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.loginPage .container .formDiv .form .inputDiv .input {
+    width: 100%;
+    background: var(--inputColor);
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.loginPage .container .formDiv .form .inputDiv .input .icon {
+    color: var(--textColor);
+    font-size: 20px;
+}
+
+.loginPage .container .formDiv .form .inputDiv .input input {
+    width: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.loginPage .container .formDiv .form .btn {
+    width: 100%;
+    padding: 10px;
+    color: var(--whiteColor);
+    font-weight: 600;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 1rem;
+}
+
+.loginPage .container .formDiv .form .btn .icon {
+    font-size: 20px;
+}
+
+.loginPage .container .formDiv .form .forgotPassword {
+    text-align: center;
+    font-size: 13px;
+    color: var(--textColor);
+}
+
+.loginPage .container .formDiv .form .forgotPassword a {
+    color: var(--PrimaryColor);
+    font-weight: 600;
+}
+
+.loginPage .container .formDiv .footerDiv {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid var(--greyColor);
+}
+
+.loginPage .container .formDiv .footerDiv .text {
+    font-size: 14px;
+    color: var(--textColor);
+}
+
+.loginPage .container .formDiv .footerDiv .btn {
+    padding: 5px 20px;
+    background: var(--whiteColorDeam);
+    color: var(--PrimaryColor);
+    border: 1px solid var(--PrimaryColor);
+}
+
+.loginPage .container .formDiv .footerDiv .btn:hover {
+    background: var(--PrimaryColor);
+    color: var(--whiteColor);
+}
+
+@media screen and (max-width: 600px) {
+    .loginPage .container {
+        width: 90%;
+    }
 }
