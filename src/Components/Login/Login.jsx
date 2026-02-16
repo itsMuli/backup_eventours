@@ -9,17 +9,37 @@ const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        // Simple mock login logic
-        if (email && password) {
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userEmail', email);
-            navigate('/packages');
-            window.location.reload(); // Quick way to refresh auth state in other components
-        } else {
-            alert('Please enter both email and password.');
+        setError('');
+
+        try {
+            const response = await fetch('http://localhost:5000/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', data.email);
+                localStorage.setItem('userName', data.username);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('userId', data._id);
+                
+                navigate('/packages');
+                window.location.reload(); 
+            } else {
+                setError(data.message || 'Login failed');
+            }
+        } catch (err) {
+            setError('Something went wrong. Please try again.');
         }
     };
 
@@ -32,6 +52,7 @@ const Login = () => {
                     </div>
 
                     <form onSubmit={handleLogin} className='form grid'>
+                        {error && <p className="errorMsg" style={{color: 'red', textAlign: 'center'}}>{error}</p>}
                         <div className="inputDiv">
                             <label htmlFor="username">Email</label>
                             <div className="input flex">

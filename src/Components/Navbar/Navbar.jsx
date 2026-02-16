@@ -10,24 +10,19 @@ const Navbar = ({ openSupport }) => {
   const navigate = useNavigate();
   const [active, setActive] = useState('navBar')
   const [transparent, setTransparent] = useState('header')
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   
-  // Track login state for UI toggling
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
 
-  const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages'].includes(location.pathname);
+  const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages', '/my-bookings'].includes(location.pathname);
 
-  const showNav = () => {
-    setActive('navBar activeNavbar')
-  }
-
-  const removeNav = () => {
-    setActive('navBar')
-  }
+  const showNav = () => { setActive('navBar activeNavbar') }
+  const removeNav = () => { setActive('navBar') }
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userEmail');
+    localStorage.clear();
     setIsLoggedIn(false);
+    setShowLogoutModal(false);
     removeNav();
     navigate('/');
     window.location.reload();
@@ -36,8 +31,7 @@ const Navbar = ({ openSupport }) => {
   const addBg = useCallback(() => {
     if (window.scrollY >= 10 || isAuthPage) {
       setTransparent(isAuthPage ? 'header activeHeader authHeader' : 'header activeHeader')
-    }
-    else {
+    } else {
       setTransparent('header')
     }
   }, [isAuthPage]);
@@ -56,20 +50,9 @@ const Navbar = ({ openSupport }) => {
     }
   }
 
-  useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.replace('#', '');
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, [location.pathname, location.hash]);
-
   return (
     <section className='navBarSection'>
       <div className={transparent}>
-
         <div className='logoDiv'>
           <Link to='/' className='logo' onClick={() => { removeNav(); window.scrollTo(0, 0); }}>
             <h1 className='flex'><SiYourtraveldottv className="icon" />
@@ -77,9 +60,9 @@ const Navbar = ({ openSupport }) => {
             </h1>
           </Link>
         </div>
+
         <div className={active}>
           <ul className='navLists flex'>
-
             <li className='navItem'>
               <a href="#popular" onClick={(e) => handleNavClick(e, '#popular')} className='navLink'>Popular</a>
             </li>
@@ -87,6 +70,12 @@ const Navbar = ({ openSupport }) => {
             <li className='navItem'>
               <Link to="/packages" onClick={removeNav} className='navLink'>Packages</Link>
             </li>
+
+            {isLoggedIn && (
+              <li className='navItem'>
+                <Link to="/my-bookings" onClick={removeNav} className='navLink'>My Bookings</Link>
+              </li>
+            )}
 
             <li className='navItem'>
               <a href="#blog" onClick={(e) => handleNavClick(e, '#blog')} className='navLink'>Blog</a>
@@ -98,7 +87,7 @@ const Navbar = ({ openSupport }) => {
 
             <div className="headerBtns flex">
               {isLoggedIn ? (
-                <button className='btn logoutBtn' onClick={handleLogout}>
+                <button className='btn logoutBtn' onClick={() => setShowLogoutModal(true)}>
                    <span>Logout</span>
                 </button>
               ) : (
@@ -107,11 +96,9 @@ const Navbar = ({ openSupport }) => {
                 </button>
               )}
             </div>
-
           </ul>
 
-          <div onClick={removeNav}
-            className="closeNavbar">
+          <div onClick={removeNav} className="closeNavbar">
             <FaTimes className='icon' />
           </div>
         </div>
@@ -120,6 +107,19 @@ const Navbar = ({ openSupport }) => {
           <FaBars className="icon" />
         </div>
       </div>
+
+      {showLogoutModal && (
+        <div className="logoutModal flex">
+          <div className="modalContent">
+            <h3>Confirm Logout</h3>
+            <p>Are you sure you want to log out of your account?</p>
+            <div className="modalBtns flex">
+              <button className="btn" onClick={() => setShowLogoutModal(false)}>Cancel</button>
+              <button className="btn confirmBtn" onClick={handleLogout}>Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

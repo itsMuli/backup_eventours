@@ -10,7 +10,9 @@ import Login from './Components/Login/Login';
 import Signup from './Components/Signup/Signup';
 import ForgotPassword from './Components/Login/ForgotPassword';
 import SupportModal from './Components/Support/SupportModal';
+import Bookings from './Components/Bookings/Bookings';
 import { Routes, Route } from 'react-router-dom';
+
 
 const App = () => {
   const [isSupportOpen, setIsSupportOpen] = useState(false);
@@ -36,7 +38,9 @@ const App = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/packages" element={<Packages />} />
+        <Route path="/my-bookings" element={<Bookings />} />
       </Routes>
+
       <Footer openSupport={toggleSupport} />
     </>
   )

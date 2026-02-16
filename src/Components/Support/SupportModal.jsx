@@ -6,10 +6,36 @@ import { BsCheckCircle } from 'react-icons/bs'
 
 const SupportModal = ({ closeSupport }) => {
     const [showSuccess, setShowSuccess] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setShowSuccess(true);
+        setError('');
+
+        const userId = localStorage.getItem('userId');
+
+        try {
+            const response = await fetch('http://localhost:5000/api/tickets', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message, userId }),
+            });
+
+
+            if (response.ok) {
+                setShowSuccess(true);
+            } else {
+                const data = await response.json();
+                setError(data.message || 'Failed to submit ticket');
+            }
+        } catch (err) {
+            setError('Something went wrong. Please try again.');
+        }
     }
 
     return (
@@ -57,17 +83,35 @@ const SupportModal = ({ closeSupport }) => {
                             </div>
 
                             <form onSubmit={handleSubmit} className="supportForm">
+                                {error && <p className="errorMsg" style={{color: 'red', marginBottom: '10px'}}>{error}</p>}
                                 <div className="inputDiv">
                                     <label htmlFor="name">Full Name</label>
-                                    <input type="text" placeholder="Enter your name" required />
+                                    <input 
+                                        type="text" 
+                                        placeholder="Enter your name" 
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        required 
+                                    />
                                 </div>
                                 <div className="inputDiv">
                                     <label htmlFor="email">Email Address</label>
-                                    <input type="email" placeholder="Enter your email" required />
+                                    <input 
+                                        type="email" 
+                                        placeholder="Enter your email" 
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required 
+                                    />
                                 </div>
                                 <div className="inputDiv">
                                     <label htmlFor="message">How can we help?</label>
-                                    <textarea placeholder="Describe your issue or inquiry" required></textarea>
+                                    <textarea 
+                                        placeholder="Describe your issue or inquiry" 
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        required
+                                    ></textarea>
                                 </div>
                                 <button type="submit" className="btn">Send Message</button>
                             </form>
