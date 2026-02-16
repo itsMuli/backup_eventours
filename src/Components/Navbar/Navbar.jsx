@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import "./navbar.css"
 import { SiYourtraveldottv } from 'react-icons/si'
 import { FaBars, FaTimes } from 'react-icons/fa'
@@ -33,20 +33,20 @@ const Navbar = ({ openSupport }) => {
     window.location.reload();
   }
 
-  const addBg = () => {
+  const addBg = useCallback(() => {
     if (window.scrollY >= 10 || isAuthPage) {
       setTransparent(isAuthPage ? 'header activeHeader authHeader' : 'header activeHeader')
     }
     else {
       setTransparent('header')
     }
-  }
+  }, [isAuthPage]);
 
   useEffect(() => {
     addBg();
     window.addEventListener('scroll', addBg)
     return () => window.removeEventListener('scroll', addBg);
-  }, [location.pathname]);
+  }, [addBg]);
 
   const handleNavClick = (e, sectionId) => {
     removeNav();

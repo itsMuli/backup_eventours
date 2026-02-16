@@ -4,17 +4,13 @@ import { BsCheckCircle } from 'react-icons/bs';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Data = [
-    // ... same data as before
-]
-
 const Packages = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const isStandalone = location.pathname === '/packages';
 
     // Mock authentication check - in real app this would come from a context/store
-    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     const [filteredData, setFilteredData] = useState([]);
     const [selectedPackage, setSelectedPackage] = useState(null);
