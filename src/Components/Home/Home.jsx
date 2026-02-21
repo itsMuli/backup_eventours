@@ -14,9 +14,42 @@ const Home = () => {
         category: ''
     });
 
+    const [bgIndex, setBgIndex] = useState(0);
+    const [isTransitioning, setIsTransitioning] = useState(true);
+    
+    const originalImages = [
+        'Images/img2.jpg',
+        'Images/2 antelopes.avif',
+        'Images/Elephant.avif',
+        'Images/Zebra.avif',
+        'Images/mount.avif',
+        'Images/sunset.avif'
+    ];
+
+    // Add clone of first image at the end for seamless loop
+    const carouselImages = [...originalImages, originalImages[0]];
+
     useEffect(() => {
         Aos.init({ duration: 2000 })
-    }, [])
+        
+        const interval = setInterval(() => {
+            setIsTransitioning(true);
+            setBgIndex((prev) => prev + 1);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    // Handle the "jump" back to the start without transition
+    useEffect(() => {
+        if (bgIndex === carouselImages.length - 1) {
+            const timer = setTimeout(() => {
+                setIsTransitioning(false);
+                setBgIndex(0);
+            }, 1200); // 1200ms matches the CSS transition time
+            return () => clearTimeout(timer);
+        }
+    }, [bgIndex, carouselImages.length]);
 
     const handleSearchInput = (e) => {
         const { name, value } = e.target;
@@ -34,6 +67,20 @@ const Home = () => {
 
     return (
         <section className='home'>
+            {/* Sliding Background Carousel */}
+            <div className="homeSlider">
+                <div className="sliderContent" style={{
+                    transform: `translateX(-${bgIndex * 100}%)`,
+                    transition: isTransitioning ? 'transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1)' : 'none'
+                }}>
+                    {carouselImages.map((img, index) => (
+                        <div key={index} className="singleSlide" style={{
+                            backgroundImage: `linear-gradient(rgba(33, 33, 33, 0.5), rgba(33, 33, 33, 0.5)), url('${img}')`
+                        }}></div>
+                    ))}
+                </div>
+            </div>
+
             <div className='secContainer container'>
                 <div className='homeText'>
                     <h1 data-aos="fade-up" className='title'>

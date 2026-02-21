@@ -5,9 +5,10 @@ import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { BsCheckCircle } from 'react-icons/bs'
 
 const SupportModal = ({ closeSupport }) => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const [showSuccess, setShowSuccess] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState(localStorage.getItem('userName') || '');
+    const [email, setEmail] = useState(localStorage.getItem('userEmail') || '');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
@@ -16,12 +17,14 @@ const SupportModal = ({ closeSupport }) => {
         setError('');
 
         const userId = localStorage.getItem('userId');
+        const token = localStorage.getItem('token');
 
         try {
             const response = await fetch('http://localhost:5000/api/tickets', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': token ? `Bearer ${token}` : ''
                 },
                 body: JSON.stringify({ name, email, message, userId }),
             });

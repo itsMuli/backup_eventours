@@ -14,15 +14,6 @@ const Bookings = () => {
     const token = localStorage.getItem('token');
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
-    useEffect(() => {
-        if (isLoggedIn && token) {
-            fetchData();
-        } else {
-            setLoading(false);
-        }
-    }, [isLoggedIn, token, fetchData]);
-
-
     const fetchBookings = useCallback(async () => {
         try {
             const response = await fetch('http://localhost:5000/api/bookings/mybookings', {
@@ -57,6 +48,14 @@ const Bookings = () => {
         await Promise.all([fetchBookings(), fetchTickets()]);
         setLoading(false);
     }, [fetchBookings, fetchTickets]);
+
+    useEffect(() => {
+        if (isLoggedIn && token) {
+            fetchData();
+        } else {
+            setLoading(false);
+        }
+    }, [isLoggedIn, token, fetchData]);
 
 
 
@@ -142,24 +141,45 @@ const Bookings = () => {
                     <p>Start exploring our world-class packages to book your next adventure!</p>
                 </div>
             ) : (
-                <div className="bookingsGrid grid">
-                    {bookings.map(booking => (
-                        <div key={booking._id} className="bookingItem">
-                            <div className="imgDiv">
-                                <img src={`Images/${booking.tour?.imgSrc}`} alt={booking.tour?.destTitle} />
-                                <span className={`statusBadge ${booking.status.toLowerCase()}`}>{booking.status}</span>
-
-
-                            </div>
-                            <div className="bookingContent">
-                                <div className="info">
-                                    <div className="infoHeader flex" style={{justifyContent: 'space-between', alignItems: 'flex-start'}}>
-                                        <div>
-                                            <h3>{booking.tour?.destTitle}</h3>
-                                            <span className="location">{booking.tour?.location}</span>
+                <div className="tableContainer">
+                    <table className="customTable">
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Booking ID</th>
+                                <th>Travel Date</th>
+                                <th>Guests</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {bookings.map(booking => (
+                                <tr key={booking._id}>
+                                    <td>
+                                        <div className="destCell flex">
+                                            <div className="imgDiv">
+                                                <img src={`Images/${booking.tour?.imgSrc}`} alt={booking.tour?.destTitle} />
+                                            </div>
+                                            <div className="text">
+                                                <span className="destName">{booking.tour?.destTitle}</span>
+                                                <span className="location">{booking.tour?.location}</span>
+                                            </div>
                                         </div>
+                                    </td>
+                                    <td><span className="idBadge">{booking._id.slice(-8).toUpperCase()}</span></td>
+                                    <td>{new Date(booking.bookingDate).toLocaleDateString()}</td>
+                                    <td>{booking.guests} {booking.guests > 1 ? 'People' : 'Person'}</td>
+                                    <td><span className="priceText">Ksh {booking.totalPrice}</span></td>
+                                    <td>
+                                        <span className={`statusBadge ${booking.status.toLowerCase()}`}>
+                                            {booking.status}
+                                        </span>
+                                    </td>
+                                    <td>
                                         <div className="bookingActions flex">
-                                            {booking.status !== 'Cancelled' && (
+                                            {booking.status !== 'Cancelled' ? (
                                                 <>
                                                     <button className="iconBtn editBtn" onClick={() => handleEdit(booking)} title="Edit Trip">
                                                         <AiOutlineEdit className="icon" />
@@ -168,20 +188,15 @@ const Bookings = () => {
                                                         <AiOutlineDelete className="icon" />
                                                     </button>
                                                 </>
+                                            ) : (
+                                                <span style={{fontSize: '0.8rem', color: 'var(--greyColor)'}}>N/A</span>
                                             )}
                                         </div>
-                                    </div>
-                                    
-                                    <div className="bookingDetails">
-                                        <p><strong>Booking ID:</strong> <span>{booking._id.slice(-8).toUpperCase()}</span></p>
-                                        <p><strong>Travel Date:</strong> <span>{new Date(booking.bookingDate).toLocaleDateString()}</span></p>
-                                        <p><strong>Total Guests:</strong> <span>{booking.guests} {booking.guests > 1 ? 'People' : 'Person'}</span></p>
-                                        <p><strong>Total Amount:</strong> <span>Ksh {booking.totalPrice}</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             )}
 
@@ -196,24 +211,39 @@ const Bookings = () => {
                     <p>If you have any issues, feel free to contact our support team.</p>
                 </div>
             ) : (
-                <div className="ticketsGrid grid" style={{gap: '1.5rem'}}>
-                    {tickets.map(ticket => (
-                        <div key={ticket._id} className="ticketItem" style={{background: 'var(--whiteColor)', padding: '1.5rem', borderRadius: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.05)'}}>
-                            <div className="flex" style={{justifyContent: 'space-between', marginBottom: '1rem'}}>
-                                <h4 style={{color: 'var(--blackColor)'}}>Ticket ID: {ticket._id.slice(-8).toUpperCase()}</h4>
-                                <span className={`statusBadge ${ticket.status.toLowerCase()}`} style={{
-                                    background: ticket.status.toLowerCase() === 'open' ? '#f1c40f' : '#27ae60',
-                                    padding: '0.2rem 0.6rem',
-                                    borderRadius: '1rem',
-                                    fontSize: '0.8rem',
-                                    color: 'white'
-                                }}>{ticket.status}</span>
-                            </div>
-                            <p style={{color: 'var(--textColor)', fontSize: '0.9rem', marginBottom: '0.5rem'}}><strong>Subject:</strong> Support Request</p>
-                            <p style={{color: 'var(--textColor)', fontSize: '0.9rem'}}><strong>Message:</strong> {ticket.message}</p>
-                            <p style={{marginTop: '1rem', fontSize: '0.8rem', color: 'var(--greyColor)'}}>Submitted on: {new Date(ticket.createdAt).toLocaleDateString()}</p>
-                        </div>
-                    ))}
+                <div className="tableContainer">
+                    <table className="customTable ticketTable">
+                        <thead>
+                            <tr>
+                                <th>Ticket ID</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+                                <th>Submitted On</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tickets.map(ticket => (
+                                <tr key={ticket._id}>
+                                    <td><span className="idBadge">{ticket._id.slice(-8).toUpperCase()}</span></td>
+                                    <td><strong>Support Request</strong></td>
+                                    <td>
+                                        <div className="messageCell" title={ticket.message}>
+                                            {ticket.message}
+                                        </div>
+                                    </td>
+                                    <td>{new Date(ticket.createdAt).toLocaleDateString()}</td>
+                                    <td>
+                                        <span className={`statusBadge ${ticket.status.toLowerCase()}`} style={{
+                                            background: ticket.status.toLowerCase() === 'open' ? '#f1c40f' : '#27ae60'
+                                        }}>
+                                            {ticket.status}
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             )}
 
@@ -229,7 +259,9 @@ const Bookings = () => {
                                 <input 
                                     type="date" 
                                     value={editData.date} 
-                                    min={new Date().toISOString().split('T')[0]}
+                                    min={editingBooking.bookingDate.split('T')[0] < new Date().toLocaleDateString('en-CA') 
+                                        ? editingBooking.bookingDate.split('T')[0] 
+                                        : new Date().toLocaleDateString('en-CA')}
                                     onChange={(e) => setEditData({...editData, date: e.target.value})}
                                     required
                                 />
@@ -245,8 +277,8 @@ const Bookings = () => {
                                 />
                             </div>
                             <div className="newTotal">
-                                <strong>Estimated Cost:</strong> <br/>
-                                Ksh {editingBooking.tour.fees * editData.guests}
+                                <strong>Estimated Cost</strong>
+                                <span className="price">Ksh {editingBooking.tour.fees * editData.guests}</span>
                             </div>
                             <div className="modalFooter">
                                 <button type="button" className="btn cancelBtn" onClick={() => setEditingBooking(null)}>Exit</button>
@@ -258,27 +290,18 @@ const Bookings = () => {
             )}
             {deletingBooking && (
                 <div className="editModal">
-                    <div className="modalContent" style={{textAlign: 'center'}}>
+                    <div className="modalContent">
                         <h3>Cancel Booking</h3>
-                        <p style={{marginBottom: '1rem', color: 'var(--textColor)'}}>
-                            Are you sure you want to cancel your trip to <strong>{deletingBooking.tour.destTitle}</strong>?
+                        <p style={{marginBottom: '1.5rem', color: 'var(--textColor)', textAlign: 'center'}}>
+                            Are you sure you want to cancel your trip to <strong style={{color: 'var(--blackColor)'}}>{deletingBooking.tour.destTitle}</strong>?
                         </p>
-                        <div className="inputDiv" style={{textAlign: 'left', marginBottom: '1.5rem'}}>
-                            <label style={{display: 'block', marginBottom: '.5rem', fontWeight: '600'}}>Reason for cancellation</label>
+                        <div className="inputDiv">
+                            <label>Reason for cancellation</label>
                             <textarea 
                                 value={cancelReason}
                                 onChange={(e) => setCancelReason(e.target.value)}
                                 placeholder="Please let us know why you are cancelling..."
-                                style={{
-                                    width: '100%',
-                                    padding: '1rem',
-                                    borderRadius: '.8rem',
-                                    border: '1px solid var(--greyColor)',
-                                    background: 'var(--inputColor)',
-                                    minHeight: '100px',
-                                    outline: 'none',
-                                    fontFamily: 'inherit'
-                                }}
+                                style={{ minHeight: '120px' }}
                                 required
                             />
                         </div>
