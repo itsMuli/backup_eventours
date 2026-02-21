@@ -5,7 +5,6 @@ import { HiOutlineLocationMarker } from 'react-icons/hi'
 import { BsCheckCircle } from 'react-icons/bs'
 
 const SupportModal = ({ closeSupport }) => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const [showSuccess, setShowSuccess] = useState(false);
     const [name, setName] = useState(localStorage.getItem('userName') || '');
     const [email, setEmail] = useState(localStorage.getItem('userEmail') || '');
