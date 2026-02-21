@@ -11,10 +11,13 @@ const Navbar = ({ openSupport }) => {
   const [active, setActive] = useState('navBar')
   const [transparent, setTransparent] = useState('header')
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn') === 'true');
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const userRole = localStorage.getItem('userRole');
+  const userName = localStorage.getItem('userName');
 
-  const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages', '/my-bookings'].includes(location.pathname);
+  const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages', '/my-bookings', '/admin'].includes(location.pathname);
+  const isAdminView = location.pathname === '/admin';
 
   const showNav = () => { setActive('navBar activeNavbar') }
   const removeNav = () => { setActive('navBar') }
@@ -23,6 +26,7 @@ const Navbar = ({ openSupport }) => {
     localStorage.clear();
     setIsLoggedIn(false);
     setShowLogoutModal(false);
+    setShowProfileDropdown(false);
     removeNav();
     navigate('/');
     window.location.reload();
@@ -56,46 +60,49 @@ const Navbar = ({ openSupport }) => {
         <div className='logoDiv'>
           <Link to='/' className='logo' onClick={() => { removeNav(); window.scrollTo(0, 0); }}>
             <h1 className='flex'><SiYourtraveldottv className="icon" />
-              EvenTours
+              EvenTours {isAdminView && <span className="adminTag">ADMIN</span>}
             </h1>
           </Link>
         </div>
 
         <div className={active}>
           <ul className='navLists flex'>
-            <li className='navItem'>
-              <a href="#popular" onClick={(e) => handleNavClick(e, '#popular')} className='navLink'>Popular</a>
-            </li>
-
-            <li className='navItem'>
-              <Link to="/packages" onClick={removeNav} className='navLink'>Packages</Link>
-            </li>
-
-            {isLoggedIn && (
-              <li className='navItem'>
-                <Link to="/my-bookings" onClick={removeNav} className='navLink'>My Bookings</Link>
-              </li>
+            {!isAdminView && (
+              <>
+                <li className='navItem'>
+                  <a href="#popular" onClick={(e) => handleNavClick(e, '#popular')} className='navLink'>Popular</a>
+                </li>
+                <li className='navItem'>
+                  <Link to="/packages" onClick={removeNav} className='navLink'>Packages</Link>
+                </li>
+                <li className='navItem'>
+                  <a href="#blog" onClick={(e) => handleNavClick(e, '#blog')} className='navLink'>Blog</a>
+                </li>
+                <li className='navItem'>
+                  <span className='navLink' onClick={() => { removeNav(); openSupport(); }}>Contact Us</span>
+                </li>
+              </>
             )}
-
-            {isLoggedIn && localStorage.getItem('userRole') === 'admin' && (
-              <li className='navItem'>
-                <Link to="/admin" onClick={removeNav} className='navLink' style={{color: '#ff4d4d', fontWeight: 'bold'}}>Admin</Link>
-              </li>
-            )}
-
-            <li className='navItem'>
-              <a href="#blog" onClick={(e) => handleNavClick(e, '#blog')} className='navLink'>Blog</a>
-            </li>
-
-            <li className='navItem'>
-              <span className='navLink' onClick={() => { removeNav(); openSupport(); }}>Contact Us</span>
-            </li>
 
             <div className="headerBtns flex">
               {isLoggedIn ? (
-                <button className='btn logoutBtn' onClick={() => setShowLogoutModal(true)}>
-                   <span>Logout</span>
-                </button>
+                <div className="userProfile">
+                  <div className="profileTrigger flex" onClick={() => setShowProfileDropdown(!showProfileDropdown)}>
+                    <span className="userName">Hi, {userName?.split(' ')[0]}</span>
+                    <div className="userAvatar">{userName?.charAt(0).toUpperCase()}</div>
+                  </div>
+
+                  {showProfileDropdown && (
+                    <div className="profileDropdown">
+                      <Link to="/my-bookings" onClick={() => setShowProfileDropdown(false)} className="dropdownItem">My Bookings</Link>
+                      {userRole === 'admin' ? (
+                        <Link to="/admin" onClick={() => setShowProfileDropdown(false)} className="dropdownItem adminLink">Admin Dashboard</Link>
+                      ) : null}
+                      <div className="dropdownDivider"></div>
+                      <span onClick={() => setShowLogoutModal(true)} className="dropdownItem logoutItem">Logout</span>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <button className='btn loginBtn' onClick={removeNav}>
                   <Link to="/login">Login</Link>
@@ -104,7 +111,7 @@ const Navbar = ({ openSupport }) => {
             </div>
           </ul>
 
-          <div onClick={removeNav} className="closeNavbar">
+          <div onClick={() => { removeNav(); setShowProfileDropdown(false); }} className="closeNavbar">
             <FaTimes className='icon' />
           </div>
         </div>

@@ -40,7 +40,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/my-bookings" element={<Bookings />} />
-        {userRole === 'admin' && <Route path="/admin" element={<Admin />} />}
+        {localStorage.getItem('userRole') === 'admin' && <Route path="/admin" element={<Admin />} />}
       </Routes>
 
       <Footer openSupport={toggleSupport} />

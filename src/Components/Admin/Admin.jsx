@@ -1,132 +1,182 @@
 import React, { useState, useEffect } from 'react';
 import './admin.css';
-import { AiOutlineDelete, AiOutlinePlus, AiOutlineClose } from 'react-icons/ai';
+import { 
+    AiOutlinePlus, AiOutlineDelete, AiOutlineClose,
+    AiOutlineRise, AiOutlineTag, AiOutlineCarryOut, AiOutlineMessage
+} from 'react-icons/ai';
 
 const Admin = () => {
+    const [stats, setStats] = useState(null);
     const [tours, setTours] = useState([]);
+    const [bookings, setBookings] = useState([]);
+    const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [showAddModal, setShowAddModal] = useState(false);
     const [formData, setFormData] = useState({
-        destTitle: '',
-        location: '',
-        category: 'Safari',
-        fees: '',
-        description: '',
-        imgSrc: 'img11.jpg' // Default placeholder
+        destTitle: '', location: '', category: 'Safari', fees: '', description: '', imgSrc: 'img11.jpg'
     });
 
     const token = localStorage.getItem('token');
 
-    const fetchTours = async () => {
+    const fetchData = async () => {
         try {
-            const response = await fetch('https://backup-eventours-backend.vercel.app/api/tours');
-            const data = await response.json();
-            if (response.ok) {
-                setTours(data);
-            }
-            setLoading(false);
+            const [anaRes, tourRes, bookRes, tickRes] = await Promise.all([
+                fetch('https://backup-eventours-backend.vercel.app/api/admin/analytics', { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch('https://backup-eventours-backend.vercel.app/api/tours'),
+                fetch('https://backup-eventours-backend.vercel.app/api/bookings', { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch('https://backup-eventours-backend.vercel.app/api/tickets', { headers: { 'Authorization': `Bearer ${token}` } })
+            ]);
+
+            const [anaData, tourData, bookData, tickData] = await Promise.all([
+                anaRes.json(), tourRes.json(), bookRes.json(), tickRes.json()
+            ]);
+
+            setStats(anaData.stats);
+            setTours(tourData);
+            setBookings(bookData);
+            setTickets(tickData);
         } catch (err) {
             console.error(err);
+        } finally {
             setLoading(false);
         }
     };
 
-    useEffect(() => {
-        fetchTours();
-    }, []);
+    useEffect(() => { fetchData(); }, []);
 
-    const handleDelete = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this package?')) return;
-
+    const handleDeleteTour = async (id) => {
+        if (!window.confirm('Delete this package?')) return;
         try {
-            const response = await fetch(`https://backup-eventours-backend.vercel.app/api/tours/${id}`, {
+            const res = await fetch(`https://backup-eventours-backend.vercel.app/api/tours/${id}`, {
                 method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
+                headers: { 'Authorization': `Bearer ${token}` }
             });
-            if (response.ok) {
-                fetchTours();
-            }
-        } catch (err) {
-            console.error(err);
-        }
+            if (res.ok) fetchData();
+        } catch (err) { console.error(err); }
     };
 
-    const handleAddPackage = async (e) => {
+    const handleAddTour = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('https://backup-eventours-backend.vercel.app/api/tours', {
+            const res = await fetch('https://backup-eventours-backend.vercel.app/api/tours', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({ ...formData, id: tours.length + 1 })
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ ...formData, id: Date.now() })
             });
-            if (response.ok) {
+            if (res.ok) {
                 setShowAddModal(false);
-                setFormData({
-                    destTitle: '',
-                    location: '',
-                    category: 'Safari',
-                    fees: '',
-                    description: '',
-                    imgSrc: 'img11.jpg'
-                });
-                fetchTours();
+                fetchData();
             }
-        } catch (err) {
-            console.error(err);
-        }
+        } catch (err) { console.error(err); }
     };
 
+    if (loading) return <div className="adminLoading">Refining Dashboard...</div>;
+
     return (
-        <section className="adminSection container section">
-            <div className="secIntro flex">
+        <div className="adminContainer section">
+            <header className="adminHeader flex">
                 <div>
-                    <h2 className="secTitle">Admin Dashboard</h2>
-                    <p>Manage travel packages and inventory.</p>
+                    <h1>Management Hub</h1>
+                    <p>Overview of your travel empire.</p>
                 </div>
                 <button className="btn flex" onClick={() => setShowAddModal(true)}>
-                    <AiOutlinePlus className="icon" /> Add New Package
+                    <AiOutlinePlus /> New Package
                 </button>
+            </header>
+
+            <div className="analyticsGrid">
+                <div className="anaCard">
+                    <AiOutlineRise className="anaIcon" />
+                    <div>
+                        <span>Total Revenue</span>
+                        <h4>Ksh {stats?.totalRevenue?.toLocaleString()}</h4>
+                    </div>
+                </div>
+                <div className="anaCard">
+                    <AiOutlineCarryOut className="anaIcon" />
+                    <div>
+                        <span>Bookings</span>
+                        <h4>{stats?.totalBookings}</h4>
+                    </div>
+                </div>
+                <div className="anaCard">
+                    <AiOutlineTag className="anaIcon" />
+                    <div>
+                        <span>Packages</span>
+                        <h4>{stats?.totalPackages}</h4>
+                    </div>
+                </div>
+                <div className="anaCard">
+                    <AiOutlineMessage className="anaIcon" />
+                    <div>
+                        <span>Tickets</span>
+                        <h4>{stats?.totalTickets}</h4>
+                    </div>
+                </div>
             </div>
 
-            {loading ? (
-                <div className="loading">Loading packages...</div>
-            ) : (
-                <div className="adminTableContainer">
-                    <table className="adminTable">
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Title</th>
-                                <th>Location</th>
-                                <th>Price (Ksh)</th>
-                                <th>Category</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tours.map(tour => (
-                                <tr key={tour._id}>
-                                    <td><img src={`Images/${tour.imgSrc}`} alt="" className="adminThumb" /></td>
-                                    <td>{tour.destTitle}</td>
-                                    <td>{tour.location}</td>
-                                    <td>{tour.fees}</td>
-                                    <td>{tour.category}</td>
-                                    <td>
-                                        <button className="deleteBtn" onClick={() => handleDelete(tour._id)}>
-                                            <AiOutlineDelete />
-                                        </button>
-                                    </td>
+            <div className="dashboardMain grid">
+                <section className="dashboardSection">
+                    <div className="sectionHeader flex">
+                        <h3>Active Packages</h3>
+                    </div>
+                    <div className="packageList">
+                        {tours.map(t => (
+                            <div key={t._id} className="packageItem flex">
+                                <img src={`Images/${t.imgSrc}`} alt="" />
+                                <div className="pInfo">
+                                    <h5>{t.destTitle}</h5>
+                                    <p>Ksh {t.fees}</p>
+                                </div>
+                                <AiOutlineDelete className="delBtn" onClick={() => handleDeleteTour(t._id)} />
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="dashboardSection">
+                    <div className="sectionHeader flex">
+                        <h3>Recent Bookings</h3>
+                    </div>
+                    <div className="scrollTable">
+                        <table className="miniTable">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Tour</th>
+                                    <th>Status</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+                            </thead>
+                            <tbody>
+                                {bookings.slice(0, 10).map(b => (
+                                    <tr key={b._id}>
+                                        <td>{b.user?.username}</td>
+                                        <td>{b.tour?.destTitle}</td>
+                                        <td><span className={`badge ${b.status}`}>{b.status}</span></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section className="dashboardSection fullWidth">
+                    <div className="sectionHeader flex">
+                        <h3>Support Inbox</h3>
+                    </div>
+                    <div className="ticketList grid">
+                        {tickets.slice(0, 4).map(t => (
+                            <div key={t._id} className="ticketItem">
+                                <div className="tHead flex">
+                                    <strong>{t.name}</strong>
+                                    <small>{new Date(t.createdAt).toLocaleDateString()}</small>
+                                </div>
+                                <p>{t.message}</p>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </div>
 
             {showAddModal && (
                 <div className="adminModal flex">
@@ -135,24 +185,15 @@ const Admin = () => {
                             <h3>Add New Package</h3>
                             <AiOutlineClose className="icon" onClick={() => setShowAddModal(false)} />
                         </div>
-                        <form onSubmit={handleAddPackage} className="grid">
+                        <form onSubmit={handleAddTour} className="grid">
                             <div className="inputDiv">
                                 <label>Destination Title</label>
                                 <input type="text" placeholder="e.g. DIANI BEACH" value={formData.destTitle} onChange={(e) => setFormData({...formData, destTitle: e.target.value})} required />
                             </div>
-                            <div className="inputDiv">
-                                <label>Location</label>
-                                <input type="text" placeholder="e.g. Coastal Kenya" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} required />
-                            </div>
                             <div className="inputDiv flex">
                                 <div className="field">
-                                    <label>Category</label>
-                                    <select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})}>
-                                        <option value="Safari">Safari</option>
-                                        <option value="Beach">Beach</option>
-                                        <option value="Mountain">Mountain</option>
-                                        <option value="City">City</option>
-                                    </select>
+                                    <label>Location</label>
+                                    <input type="text" placeholder="Coastal Kenya" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} required />
                                 </div>
                                 <div className="field">
                                     <label>Price (Ksh)</label>
@@ -164,15 +205,15 @@ const Admin = () => {
                                 <textarea placeholder="Package details..." value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} required />
                             </div>
                             <div className="inputDiv">
-                                <label>Image Name (from public/Images)</label>
+                                <label>Image Name</label>
                                 <input type="text" placeholder="img11.jpg" value={formData.imgSrc} onChange={(e) => setFormData({...formData, imgSrc: e.target.value})} required />
                             </div>
-                            <button type="submit" className="btn">Create Package</button>
+                            <button type="submit" className="btn">Publish Package</button>
                         </form>
                     </div>
                 </div>
             )}
-        </section>
+        </div>
     );
 };
 

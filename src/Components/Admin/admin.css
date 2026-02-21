@@ -1,126 +1,229 @@
-.adminSection {
-    margin-top: 5rem;
+.adminContainer {
+    max-width: 1200px;
+    margin: 6rem auto 2rem;
+    padding: 0 1.5rem;
 }
 
-.adminSection .secIntro {
+.adminHeader {
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 }
 
-.adminSection .secIntro .btn {
-    gap: 0.5rem;
+.adminHeader h1 {
+    font-size: 1.8rem;
+    color: var(--blackColor);
 }
 
-.adminTableContainer {
-    background: var(--whiteColor);
-    border-radius: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    overflow-x: auto;
+.adminHeader p {
+    color: var(--greyColor);
+    font-size: 0.9rem;
 }
 
-.adminTable {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
+/* Analytics */
+.analyticsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
 }
 
-.adminTable th,
-.adminTable td {
-    padding: 1rem;
+.anaCard {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    transition: 0.3s;
+}
+
+.anaCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.anaIcon {
+    font-size: 2.5rem;
+    color: var(--PrimaryColor);
+    background: rgba(0, 122, 255, 0.05);
+    padding: 0.5rem;
+    border-radius: 12px;
+}
+
+.anaCard span {
+    font-size: 0.8rem;
+    color: var(--greyColor);
+}
+
+.anaCard h4 {
+    font-size: 1.2rem;
+    color: var(--blackColor);
+}
+
+/* Dashboard Layout */
+.dashboardMain {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.dashboardSection {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.fullWidth {
+    grid-column: span 2;
+}
+
+.sectionHeader {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid #f0f0f0;
 }
 
-.adminTable th {
-    background: #fafafa;
-    color: var(--greyColor);
-    font-weight: 600;
+.sectionHeader h3 {
+    font-size: 1.1rem;
+    color: var(--blackColor);
 }
 
-.adminThumb {
-    width: 60px;
-    height: 60px;
+/* Package List */
+.packageList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.packageItem {
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-radius: 12px;
+    background: #fcfcfc;
+    border: 1px solid #f0f0f0;
+}
+
+.packageItem img {
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 8px;
 }
 
-.adminTable .deleteBtn {
-    background: #fff0f0;
-    color: #ff4d4d;
-    border: none;
-    padding: 0.5rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.adminTable .deleteBtn:hover {
-    background: #ff4d4d;
-    color: #fff;
-}
-
-/* Modals */
-.adminModal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-}
-
-.adminModal .modalContent {
-    background: var(--whiteColor);
-    width: 90%;
-    max-width: 500px;
-    padding: 2rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-.adminModal .modalHeader {
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-}
-
-.adminModal .modalHeader .icon {
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.adminModal .form {
-    gap: 1rem;
-}
-
-.adminModal .inputDiv label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-}
-
-.adminModal .inputDiv input,
-.adminModal .inputDiv select,
-.adminModal .inputDiv textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    outline: none;
-}
-
-.adminModal .inputDiv.flex {
-    gap: 1rem;
-}
-
-.adminModal .inputDiv.flex .field {
+.pInfo {
     flex: 1;
 }
 
-.adminModal .btn {
+.pInfo h5 {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.pInfo p {
+    font-size: 0.8rem;
+    color: var(--PrimaryColor);
+}
+
+.delBtn {
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+
+/* Mini Table */
+.miniTable {
     width: 100%;
-    margin-top: 1rem;
+    border-collapse: collapse;
+}
+
+.miniTable th {
+    text-align: left;
+    font-size: 0.8rem;
+    color: var(--greyColor);
+    padding: 0.8rem;
+}
+
+.miniTable td {
+    padding: 0.8rem;
+    font-size: 0.85rem;
+    border-top: 1px solid #f9f9f9;
+}
+
+.badge {
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.badge.Pending {
+    background: #fff7e6;
+    color: #fa8c16;
+}
+
+.badge.Confirmed {
+    background: #f6ffed;
+    color: #52c41a;
+}
+
+.badge.Cancelled {
+    background: #fff1f0;
+    color: #f5222d;
+}
+
+/* Tickets */
+.ticketList {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.ticketItem {
+    background: #fcfcfc;
+    padding: 1.2rem;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+}
+
+.tHead {
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.ticketItem p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--textColor);
+}
+
+/* Loading */
+.adminLoading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    font-size: 1.1rem;
+    color: var(--PrimaryColor);
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 960px) {
+    .dashboardMain {
+        grid-template-columns: 1fr;
+    }
+
+    .fullWidth {
+        grid-column: span 1;
+    }
+
+    .ticketList {
+        grid-template-columns: 1fr;
+    }
 }
