@@ -77,6 +77,12 @@ const Navbar = ({ openSupport }) => {
               </li>
             )}
 
+            {isLoggedIn && localStorage.getItem('userRole') === 'admin' && (
+              <li className='navItem'>
+                <Link to="/admin" onClick={removeNav} className='navLink' style={{color: '#ff4d4d', fontWeight: 'bold'}}>Admin</Link>
+              </li>
+            )}
+
             <li className='navItem'>
               <a href="#blog" onClick={(e) => handleNavClick(e, '#blog')} className='navLink'>Blog</a>
             </li>

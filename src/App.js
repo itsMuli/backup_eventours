@@ -11,11 +11,12 @@ import Signup from './Components/Signup/Signup';
 import ForgotPassword from './Components/Login/ForgotPassword';
 import SupportModal from './Components/Support/SupportModal';
 import Bookings from './Components/Bookings/Bookings';
+import Admin from './Components/Admin/Admin';
 import { Routes, Route } from 'react-router-dom';
-
 
 const App = () => {
   const [isSupportOpen, setIsSupportOpen] = useState(false);
+  const userRole = localStorage.getItem('userRole');
 
   const toggleSupport = () => {
     setIsSupportOpen(!isSupportOpen);
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/my-bookings" element={<Bookings />} />
+        {userRole === 'admin' && <Route path="/admin" element={<Admin />} />}
       </Routes>
 
       <Footer openSupport={toggleSupport} />

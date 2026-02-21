@@ -32,6 +32,7 @@ const Login = () => {
                 localStorage.setItem('userName', data.username);
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('userId', data._id);
+                localStorage.setItem('userRole', data.role);
                 
                 navigate('/packages');
                 window.location.reload(); 
