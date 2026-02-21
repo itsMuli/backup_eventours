@@ -94,10 +94,13 @@ const Navbar = ({ openSupport }) => {
 
                   {showProfileDropdown && (
                     <div className="profileDropdown">
-                      <Link to="/my-bookings" onClick={() => setShowProfileDropdown(false)} className="dropdownItem">My Bookings</Link>
-                      {userRole === 'admin' ? (
+                      {userRole !== 'admin' && (
+                        <Link to="/my-bookings" onClick={() => setShowProfileDropdown(false)} className="dropdownItem">My Bookings</Link>
+                      )}
+                      
+                      {userRole === 'admin' && (
                         <Link to="/admin" onClick={() => setShowProfileDropdown(false)} className="dropdownItem adminLink">Admin Dashboard</Link>
-                      ) : null}
+                      )}
                       <div className="dropdownDivider"></div>
                       <span onClick={() => setShowLogoutModal(true)} className="dropdownItem logoutItem">Logout</span>
                     </div>
