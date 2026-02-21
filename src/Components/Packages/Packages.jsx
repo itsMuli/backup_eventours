@@ -38,7 +38,7 @@ const Packages = () => {
     useEffect(() => {
         const fetchTours = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/tours');
+                const response = await fetch('https://backup-eventours-backend.vercel.app/api/tours');
                 const data = await response.json();
                 if (response.ok) {
                     // Prepend Base Path for images if needed, but here we'll assume relative path from public or handled by backend
@@ -99,7 +99,7 @@ const Packages = () => {
         const total = selectedPackage.fees * (bookingData.guests || 1);
 
         try {
-            const response = await fetch('http://localhost:5000/api/bookings', {
+            const response = await fetch('https://backup-eventours-backend.vercel.app/api/bookings', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

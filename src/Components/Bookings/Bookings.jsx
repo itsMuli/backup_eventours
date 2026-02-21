@@ -16,7 +16,7 @@ const Bookings = () => {
 
     const fetchBookings = useCallback(async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/bookings/mybookings', {
+            const response = await fetch('https://backup-eventours-backend.vercel.app/api/bookings/mybookings', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -31,7 +31,7 @@ const Bookings = () => {
 
     const fetchTickets = useCallback(async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/tickets/mytickets', {
+            const response = await fetch('https://backup-eventours-backend.vercel.app/api/tickets/mytickets', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (response.ok) {
@@ -71,7 +71,7 @@ const Bookings = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/bookings/${deletingBooking._id}`, {
+            const response = await fetch(`https://backup-eventours-backend.vercel.app/api/bookings/${deletingBooking._id}`, {
                 method: 'DELETE',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const Bookings = () => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:5000/api/bookings/${editingBooking._id}`, {
+            const response = await fetch(`https://backup-eventours-backend.vercel.app/api/bookings/${editingBooking._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
