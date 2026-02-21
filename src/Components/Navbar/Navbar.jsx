@@ -67,7 +67,7 @@ const Navbar = ({ openSupport }) => {
 
         <div className={active}>
           <ul className='navLists flex'>
-            {!isAdminView && (
+            {userRole !== 'admin' ? (
               <>
                 <li className='navItem'>
                   <a href="#popular" onClick={(e) => handleNavClick(e, '#popular')} className='navLink'>Popular</a>
@@ -82,6 +82,10 @@ const Navbar = ({ openSupport }) => {
                   <span className='navLink' onClick={() => { removeNav(); openSupport(); }}>Contact Us</span>
                 </li>
               </>
+            ) : (
+              <li className='navItem'>
+                <Link to="/admin" onClick={removeNav} className='navLink'>Admin Dashboard</Link>
+              </li>
             )}
 
             <div className="headerBtns flex">
