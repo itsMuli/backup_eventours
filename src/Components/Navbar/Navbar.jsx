@@ -17,7 +17,6 @@ const Navbar = ({ openSupport }) => {
   const userName = localStorage.getItem('userName');
 
   const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages', '/my-bookings'].includes(location.pathname);
-  const isAdminView = location.pathname === '/admin';
 
   const showNav = () => { setActive('navBar activeNavbar') }
   const removeNav = () => { setActive('navBar') }

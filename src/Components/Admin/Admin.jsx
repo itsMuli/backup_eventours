@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './admin.css';
 import { 
     AiOutlinePlus, AiOutlineDelete, AiOutlineClose,
@@ -18,7 +18,7 @@ const Admin = () => {
 
     const token = localStorage.getItem('token');
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             const [anaRes, tourRes, bookRes, tickRes] = await Promise.all([
                 fetch('https://backup-eventours-backend.vercel.app/api/admin/analytics', { headers: { 'Authorization': `Bearer ${token}` } }),
@@ -40,9 +40,9 @@ const Admin = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [token]);
 
-    useEffect(() => { fetchData(); }, []);
+    useEffect(() => { fetchData(); }, [fetchData]);
 
     const handleDeleteTour = async (id) => {
         if (!window.confirm('Delete this package?')) return;
