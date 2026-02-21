@@ -74,15 +74,12 @@ const Admin = () => {
 
     return (
         <div className="adminContainer section">
-            <header className="adminHeader flex">
-                <div>
-                    <h1>Management Hub</h1>
-                    <p>Overview of your travel empire.</p>
-                </div>
+            <div className="analyticsHeader flex">
+                <h1>Admin Overview</h1>
                 <button className="btn flex" onClick={() => setShowAddModal(true)}>
                     <AiOutlinePlus /> New Package
                 </button>
-            </header>
+            </div>
 
             <div className="analyticsGrid">
                 <div className="anaCard">

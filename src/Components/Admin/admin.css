@@ -1,27 +1,19 @@
 .adminContainer {
     max-width: 1200px;
-    margin: 6rem auto 2rem;
-    padding: 0 1.5rem;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 2rem;
 }
 
-.adminHeader {
+.analyticsHeader {
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    margin-bottom: 2.5rem;
 }
 
-.adminHeader h1 {
+.analyticsHeader h1 {
     font-size: 1.8rem;
     color: var(--blackColor);
-}
-
-.adminHeader p {
-    color: var(--greyColor);
-    font-size: 0.9rem;
+    font-weight: 700;
 }
 
 /* Analytics */

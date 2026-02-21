@@ -12,15 +12,18 @@ import ForgotPassword from './Components/Login/ForgotPassword';
 import SupportModal from './Components/Support/SupportModal';
 import Bookings from './Components/Bookings/Bookings';
 import Admin from './Components/Admin/Admin';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 const App = () => {
   const [isSupportOpen, setIsSupportOpen] = useState(false);
   const userRole = localStorage.getItem('userRole');
 
+  const location = useLocation();
   const toggleSupport = () => {
     setIsSupportOpen(!isSupportOpen);
   }
+
+  const isAdminPath = location.pathname === '/admin';
 
   return (
     <>

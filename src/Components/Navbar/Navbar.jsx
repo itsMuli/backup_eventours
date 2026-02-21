@@ -16,7 +16,7 @@ const Navbar = ({ openSupport }) => {
   const userRole = localStorage.getItem('userRole');
   const userName = localStorage.getItem('userName');
 
-  const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages', '/my-bookings', '/admin'].includes(location.pathname);
+  const isAuthPage = ['/login', '/signup', '/forgot-password', '/packages', '/my-bookings'].includes(location.pathname);
   const isAdminView = location.pathname === '/admin';
 
   const showNav = () => { setActive('navBar activeNavbar') }
@@ -60,14 +60,14 @@ const Navbar = ({ openSupport }) => {
         <div className='logoDiv'>
           <Link to='/' className='logo' onClick={() => { removeNav(); window.scrollTo(0, 0); }}>
             <h1 className='flex'><SiYourtraveldottv className="icon" />
-              EvenTours {isAdminView && <span className="adminTag">ADMIN</span>}
+              EvenTours
             </h1>
           </Link>
         </div>
 
         <div className={active}>
           <ul className='navLists flex'>
-            {userRole !== 'admin' ? (
+            {userRole !== 'admin' && (
               <>
                 <li className='navItem'>
                   <a href="#popular" onClick={(e) => handleNavClick(e, '#popular')} className='navLink'>Popular</a>
@@ -82,10 +82,6 @@ const Navbar = ({ openSupport }) => {
                   <span className='navLink' onClick={() => { removeNav(); openSupport(); }}>Contact Us</span>
                 </li>
               </>
-            ) : (
-              <li className='navItem'>
-                <Link to="/admin" onClick={removeNav} className='navLink'>Admin Dashboard</Link>
-              </li>
             )}
 
             <div className="headerBtns flex">
@@ -98,15 +94,19 @@ const Navbar = ({ openSupport }) => {
 
                   {showProfileDropdown && (
                     <div className="profileDropdown">
-                      {userRole !== 'admin' && (
-                        <Link to="/my-bookings" onClick={() => setShowProfileDropdown(false)} className="dropdownItem">My Bookings</Link>
+                      {userRole !== 'admin' ? (
+                        <>
+                          <Link to="/my-bookings" onClick={() => setShowProfileDropdown(false)} className="dropdownItem">My Bookings</Link>
+                          <div className="dropdownDivider"></div>
+                          <span onClick={() => setShowLogoutModal(true)} className="dropdownItem logoutItem">Logout</span>
+                        </>
+                      ) : (
+                        <>
+                          <Link to="/admin" onClick={() => setShowProfileDropdown(false)} className="dropdownItem adminLink">Admin</Link>
+                          <div className="dropdownDivider"></div>
+                          <span onClick={() => setShowLogoutModal(true)} className="dropdownItem logoutItem" style={{fontSize: '0.7rem', opacity: 0.7}}>Logout</span>
+                        </>
                       )}
-                      
-                      {userRole === 'admin' && (
-                        <Link to="/admin" onClick={() => setShowProfileDropdown(false)} className="dropdownItem adminLink">Admin Dashboard</Link>
-                      )}
-                      <div className="dropdownDivider"></div>
-                      <span onClick={() => setShowLogoutModal(true)} className="dropdownItem logoutItem">Logout</span>
                     </div>
                   )}
                 </div>

@@ -34,7 +34,7 @@ const Login = () => {
                 localStorage.setItem('userId', data._id);
                 localStorage.setItem('userRole', data.role);
                 
-                navigate('/packages');
+                navigate('/');
                 window.location.reload(); 
             } else {
                 setError(data.message || 'Login failed');
